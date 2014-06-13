@@ -16,7 +16,7 @@ publishTo <<= version { v =>
   Some(repo at s"http://artifactory.sphoniclabs.net:8081/artifactory/$repo")
 }
 
-credentials += Credentials(Path.userHome / ".ivy2" / ".credentials")
+credentials += Credentials(Path.userHome / ".ivy2" / ".sphonic_credentials")
 
 crossBuildingSettings
 
