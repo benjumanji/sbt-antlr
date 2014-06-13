@@ -10,12 +10,13 @@ libraryDependencies += "org.antlr" % "antlr" % "3.5" % "compile"
 
 scalacOptions := Seq("-deprecation", "-unchecked")
 
-publishTo <<= version { v => Some {
-  val repoSuffix = if (v contains "-SNAPSHOT") "snapshots" else "releases"
-  Resolver.file("gh-pages", new File("/Users/steffen/dev/stefri.github.com/repo", repoSuffix))
-}}
+publishTo <<= version { v =>
+  val reltype = if (v contains "-SNAPSHOT") "snapshot" else "release"
+  val repo = s"ext-$reltype-local"
+  Some(repo at s"http://artifactory.sphoniclabs.net:8081/artifactory/$repo")
+}
 
-credentials += Credentials(Path.userHome / ".config" / "xsbt-sh" / "nexus.config")
+credentials += Credentials(Path.userHome / ".ivy2" / ".credentials")
 
 crossBuildingSettings
 
